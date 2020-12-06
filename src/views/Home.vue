@@ -16,9 +16,9 @@
           >
         </v-col>
         <v-col xl="2" class=""></v-col>
-        <v-col xl="2" color="" class="d-flex align-center justify-space-around">
+        <v-col xl="2" color="" class="d-flex align-center justify-end">
           <!-- <v-icon color="dark-grey">mdi-account</v-icon> -->
-          <v-btn color="purple lighten-3 white--text">Login</v-btn>
+          <v-btn color="purple lighten-3 white--text mr-5">Login</v-btn>
           <v-btn color="purple lighten-2 white--text">Sign Up</v-btn>
         </v-col>
         <v-col cols="1"></v-col>
@@ -26,7 +26,7 @@
     </div>
 
     <v-row class="my-0">
-      <v-col xl="7" class="d-flex align-center">
+      <v-col cols="" sm="" md="" lg="7" xl="7" class="d-flex align-center">
         <v-row>
           <v-col cols="6" class="d-flex flex-column align-center mx-auto">
             <h1 class="display-2 home__heading">
@@ -37,13 +37,25 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-col class="d-flex">
-            <v-icon>mdi-copyright</v-icon> 2020 Travl
-          </v-col>
+          <v-col class=""><v-icon>mdi-copyright</v-icon> 2020 Travl </v-col>
         </v-row>
       </v-col>
-      <v-col :style="scrollable" xl="2"></v-col>
-      <v-col xl="3" class="d-flex flex-column justify-center">
+      <v-col
+        :style="scrollable" cols="" sm="" md="" lg="3"
+        xl="2"
+        class="d-flex flex-column justify-space-between scrollable"
+      >
+        <div v-for="image in images" :key="image.i" class="d-flex scroll">
+          <v-img :src="`${image.img}`" contain class="scroll__img" />
+          <v-card height="200" width="300" class="scrollable__card d-flex justify-center align-center">
+            <v-img :src="`${image.cardImg}`" width="25%" class="card__img" />
+            <div>
+              <p class="headline">{{ image.cardText }}</p>
+            </div>
+          </v-card>
+        </div>
+      </v-col>
+      <v-col cols="" sm="" md="" lg="2" xl="3" class="d-flex flex-column justify-center">
         <v-btn fab class="my-10" color="purple lighten-3"
           ><v-icon>mdi-chevron-up</v-icon></v-btn
         >
@@ -62,6 +74,33 @@
 export default {
   name: "Home",
   components: {},
+  data() {
+    return {
+      images: [
+        {
+          img:
+            "https://www.shareicon.net/data/2016/08/24/820079_calendar_512x512.png",
+          cardText: "Card text",
+          cardImg:
+            "https://www.shareicon.net/data/2016/08/24/820079_calendar_512x512.png",
+        },
+        {
+          img:
+            "https://www.shareicon.net/data/512x512/2016/08/31/821556_suitcase_512x512.png",
+          cardText: "Card text",
+          cardImg:
+            "https://www.shareicon.net/data/512x512/2016/08/31/821556_suitcase_512x512.png",
+        },
+        {
+          img:
+            "http://www.pngall.com/wp-content/uploads/2/Travel-PNG-File-Download-Free.png",
+          cardText: "Card text",
+          cardImg:
+            "http://www.pngall.com/wp-content/uploads/2/Travel-PNG-File-Download-Free.png",
+        },
+      ],
+    };
+  },
   computed: {
     home() {
       return {
@@ -89,6 +128,29 @@ export default {
 
 .nav__logo {
   max-width: 70px;
+}
+
+.scrollable {
+  // height: 150vh!important;
+}
+
+.scroll {
+  position: relative;
+}
+
+.scrollable__card {
+  position: absolute;
+  left: -100%;
+  border-radius: 40px!important;
+  top: 50%;
+  margin-top: -25%;
+
+  .card__img {
+    position: absolute;
+    top: -50px;
+    border-radius: 0!important;
+    left: 10px;
+  }
 }
 
 .home__nav__container {
